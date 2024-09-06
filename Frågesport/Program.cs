@@ -1,13 +1,27 @@
-﻿
-using System.Formats.Asn1;
-
+﻿string file = @"C:\Users\simon.perssonholm\Documents\prog1\Frågesport\prog.txt"; 
 string answer;
 int answer2;
 List<Question> quiz = new List<Question>();
-quiz.Add(new Question("Vilket är det största talet","1","e","pi","3",3));
 int score= 0;
 string ptheq,pop1,pop2,pop3,pop4,pcorrect;
-int pcorrect2;
+int pcorrect2,amountofquestions;
+
+if (File.Exists(file)) { 
+    string[] lines = File.ReadAllLines(file);
+    amountofquestions = int.Parse(lines[0]);
+    
+    for (int i = 0; i < amountofquestions; i++){
+        System.Console.WriteLine(i);
+        ptheq = lines[i*6+1];
+        pop1 = lines[i*6+2];
+        pop2 = lines[i*6+3];
+        pop3 = lines[i*6+4];
+        pop4 = lines[i*6+5];
+        pcorrect2 = int.Parse(lines[i*6+6]);
+        quiz.Add(new Question(ptheq,pop1,pop2,pop3,pop4,pcorrect2));
+
+    }
+}
 
 while (true) {
     mainmenu();
