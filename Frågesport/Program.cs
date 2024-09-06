@@ -1,11 +1,47 @@
-﻿List<Question> quiz = new List<Question>();
+﻿
+string answer;
+List<Question> quiz = new List<Question>();
+quiz.Add(new Question("Vilket är det största talet","1","e","pi","3",3));
 int score= 0;
 
-foreach (Question i in quiz){
-    score += i.Run();
+while (true) {
+    mainmenu();
 }
-Console.Clear();
-System.Console.WriteLine($"Score: {score.ToString()}");
+
+
+void mainmenu() {
+    Console.BackgroundColor = ConsoleColor.Black;
+    Console.Clear();
+    System.Console.WriteLine("play");
+    answer = Console.ReadLine();
+    if (answer == "play") {
+        takequiz();
+    }
+    
+}
+void takequiz() {
+    score = 0;
+    System.Console.WriteLine("press any button to go to next question");
+    Console.ReadLine();
+    foreach (Question i in quiz){
+    
+        score += i.Run();
+        Console.ReadLine();
+        Console.BackgroundColor = ConsoleColor.Black;
+    
+    }
+    Console.Clear();
+    System.Console.WriteLine($"Score: {score.ToString()}");
+    System.Console.WriteLine("play again");
+    System.Console.WriteLine("yes / no");
+    answer = Console.ReadLine();
+    if (answer == "yes"){
+        takequiz();
+    }
+    //jag vet att man inte ska kalla en metod i en metod men jag är gangster
+    
+
+}
 
 
 class Question
@@ -27,12 +63,20 @@ class Question
         Console.Clear();
         System.Console.WriteLine(theq);
         System.Console.WriteLine(@$"A:{op1}        B:{op2}
-        C:{op3}        D:{op4}");
+C:{op3}        D:{op4}");
 
         if (this.ask() == correct){
+            Console.BackgroundColor = ConsoleColor.Green;
+            Console.Clear();
+            Console.WriteLine("Correct!!!!");
+            
             return(1);
+            
         }
         else{
+            Console.BackgroundColor = ConsoleColor.Red;
+            Console.Clear();
+            Console.WriteLine("Wrong >:)");
             return(0);
         }
         
