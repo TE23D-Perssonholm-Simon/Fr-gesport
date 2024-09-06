@@ -12,6 +12,7 @@ while (true) {
 void mainmenu() {
     Console.BackgroundColor = ConsoleColor.Black;
     Console.Clear();
+    System.Console.WriteLine("write what you want to do");
     System.Console.WriteLine("play");
     answer = Console.ReadLine();
     if (answer == "play") {
@@ -21,6 +22,7 @@ void mainmenu() {
 }
 void takequiz() {
     score = 0;
+    Console.Clear();
     System.Console.WriteLine("press any button to go to next question");
     Console.ReadLine();
     foreach (Question i in quiz){
