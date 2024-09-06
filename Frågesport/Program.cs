@@ -1,13 +1,18 @@
-﻿string file = @"C:\Users\simon.perssonholm\Documents\prog1\Frågesport\prog.txt"; 
+﻿using System.IO;
+using System;
+string file = @"C:\Users\simon.perssonholm\Documents\prog1\Frågesport\prog.txt"; 
 string answer;
+
 int answer2;
 List<Question> quiz = new List<Question>();
 int score= 0;
 string ptheq,pop1,pop2,pop3,pop4,pcorrect;
 int pcorrect2,amountofquestions;
-
+List<string> lines = new List<string>(File.ReadAllLines(file));
+try{
 if (File.Exists(file)) { 
-    string[] lines = File.ReadAllLines(file);
+    
+
     amountofquestions = int.Parse(lines[0]);
     
     for (int i = 0; i < amountofquestions; i++){
@@ -22,11 +27,30 @@ if (File.Exists(file)) {
 
     }
 }
+}
+catch(Exception e){
+    System.Console.WriteLine(e.Message);
+    Console.ReadLine();
+}
 
 while (true) {
     mainmenu();
 }
 
+void save(){
+    lines.Clear();
+    lines.Add(quiz.Count().ToString());
+    foreach (Question i in quiz){
+        i.save(lines);
+    }
+    File.WriteAllLines(file,lines);
+    foreach (string str in lines){
+        System.Console.WriteLine(str);
+    }
+    Console.ReadLine();
+    
+
+}
 
 void mainmenu() {
     Console.BackgroundColor = ConsoleColor.Black;
@@ -34,6 +58,7 @@ void mainmenu() {
     System.Console.WriteLine("write what you want to do");
     System.Console.WriteLine("play");
     System.Console.WriteLine("edit");
+    System.Console.WriteLine("save");
     answer = Console.ReadLine().ToLower();
     if (answer == "play") {
         takequiz();
@@ -41,6 +66,9 @@ void mainmenu() {
     else if (answer == "edit"){
 
         edit();
+    }
+    else if (answer == "save"){
+        save();
     }
     
 }
@@ -189,6 +217,17 @@ C:{op3}        D:{op4}");
         }
         
 
+    }
+
+    public void save(List<string> strings){
+        strings.Add(theq);
+        strings.Add(op1);
+        strings.Add(op2);
+        strings.Add(op3);
+        strings.Add(op4);
+        strings.Add(correct.ToString());
+        return;
+        
     }
 
     

@@ -1,4 +1,4 @@
-2
+4
 vad är en isbjörn
 ett djur
 en person
@@ -10,4 +10,16 @@ vad är 5+2?
 2
 3
 7
+4
+Vilket tal är störst
+i^2
+e
+pi
+3
+3
+vilket tal är störst
+1
+2
+3
+4
 4
