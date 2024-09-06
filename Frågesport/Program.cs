@@ -1,5 +1,8 @@
 ﻿
+using System.Formats.Asn1;
+
 string answer;
+int answer2;
 List<Question> quiz = new List<Question>();
 quiz.Add(new Question("Vilket är det största talet","1","e","pi","3",3));
 int score= 0;
@@ -16,18 +19,56 @@ void mainmenu() {
     Console.Clear();
     System.Console.WriteLine("write what you want to do");
     System.Console.WriteLine("play");
-    System.Console.WriteLine("Write");
+    System.Console.WriteLine("edit");
     answer = Console.ReadLine().ToLower();
     if (answer == "play") {
         takequiz();
     }
-    else if (answer == "write"){
-        makequiz();
+    else if (answer == "edit"){
+
+        edit();
     }
     
 }
+void edit() {
+    Console.Clear();
+    System.Console.WriteLine("change");
+    System.Console.WriteLine("add");
+    System.Console.WriteLine("exit");
+    answer = Console.ReadLine().ToLower();
+    if (answer == "add") {
+        addquestion();
+    }
+    else if (answer == "exit") {
+        return;
+    }
+    else if (answer == "change"){
+        while (change());
+    }
+}
 
-void makequiz() {
+bool change() {
+    Console.Clear();
+    System.Console.WriteLine("Type the number of the question you want to edit");
+    for (int i= 0; i< quiz.Count(); i++){
+        System.Console.WriteLine(@$"{i}: {quiz[i].Thequestion()}");
+    }
+    System.Console.WriteLine($"{quiz.Count()}: Exit");
+    answer2 = int.Parse(Console.ReadLine());
+    if (answer2 >= quiz.Count()) {
+        return(false);
+    }
+    System.Console.WriteLine("delete or edit?");
+    answer = Console.ReadLine();
+    if (answer == "edit"){
+        quiz[answer2].edit();
+    }
+    else if (answer == "delete"){
+        quiz.RemoveAt(answer2);
+    }
+    return(true);
+}
+void addquestion() {
     while (true) {
         Console.Clear();
         System.Console.WriteLine("Type the question");
@@ -80,7 +121,9 @@ void takequiz() {
     
     }
     Console.Clear();
-    System.Console.WriteLine($"Score: {score.ToString()}");
+    float procentscore;
+    procentscore = score* 100/quiz.Count() ;
+    System.Console.WriteLine($"Score: {procentscore.ToString()}%");
     System.Console.WriteLine("play again");
     System.Console.WriteLine("yes / no");
     answer = Console.ReadLine();
@@ -106,7 +149,9 @@ class Question
         this.op4 = op4;
         this.correct = correct;
     }
-
+    public string Thequestion(){
+        return(theq);
+    }
     public int Run()
     {
         Console.Clear();
@@ -151,5 +196,69 @@ C:{op3}        D:{op4}");
             System.Console.WriteLine("Write A, B, C or D");
         }
 
+    }
+
+    private string Newvalue(){
+        System.Console.WriteLine("What do you want to replace it with");
+        return(Console.ReadLine());
+    }
+
+    public void edit(){
+        string answer;
+        Console.Clear();
+        System.Console.WriteLine($"the question: {theq}");
+        System.Console.WriteLine($"option1: {op1}");
+        System.Console.WriteLine($"option2: {op2}");
+        System.Console.WriteLine($"option3: {op3}");
+        System.Console.WriteLine($"option4: {op4}");
+        System.Console.WriteLine($"the answer: {correct.ToString()}");
+        Console.WriteLine("exit");
+        while (true){
+            System.Console.WriteLine("what do you want to edit");
+            answer = Console.ReadLine().ToLower();
+            if (answer == "the question"){
+                theq = Newvalue();
+                System.Console.WriteLine("changed :)");
+
+            }
+            else if (answer == "option1"){
+                op1 = Newvalue();
+                System.Console.WriteLine("changed :)");
+            }
+            else if (answer == "option2"){
+                op2 = Newvalue();
+                System.Console.WriteLine("changed :)");
+            }
+            else if (answer == "option3"){
+                op3 = Newvalue();
+                System.Console.WriteLine("changed :)");
+            }
+            else if (answer == "option4"){
+                op4 = Newvalue();
+                System.Console.WriteLine("changed :)");
+            }
+            else if (answer == "the answer"){
+                System.Console.WriteLine("What do you want to change it to");
+                System.Console.WriteLine("Write 1, 2, 3 or 4");
+                while (true) {
+                    answer = Console.ReadLine();
+
+                    if (int.Parse(answer) <= 4){
+                        correct = int.Parse(answer);
+                        System.Console.WriteLine("changed :)");
+                    }
+            
+                    else {
+                    System.Console.WriteLine("Write 1, 2, 3 or 4!!!!!!");
+                }
+            
+
+        }
+            }
+            else if (answer == "exit"){
+                return;
+            }
+        }
+        
     }
 }
