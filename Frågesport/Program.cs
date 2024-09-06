@@ -3,6 +3,7 @@ string answer;
 List<Question> quiz = new List<Question>();
 quiz.Add(new Question("Vilket är det största talet","1","e","pi","3",3));
 int score= 0;
+string ptheq,pop1,pop2,pop3,pop4,pcorrect;
 
 while (true) {
     mainmenu();
@@ -18,6 +19,21 @@ void mainmenu() {
     if (answer == "play") {
         takequiz();
     }
+    
+}
+
+void makequiz() {
+    Console.Clear();
+    System.Console.WriteLine("Type the question");
+    ptheq = Console.ReadLine();
+    Console.WriteLine("type 4 option seperate with enter");
+    pop1 = Console.ReadLine();
+    pop2 = Console.ReadLine();
+    pop3 = Console.ReadLine();
+    pop4 = Console.ReadLine();
+    Console.WriteLine("Type 1 if the correct answer is option 1 and so on");
+    pcorrect = Console.ReadLine();
+    
     
 }
 void takequiz() {
