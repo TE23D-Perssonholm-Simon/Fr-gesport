@@ -4,6 +4,7 @@ List<Question> quiz = new List<Question>();
 quiz.Add(new Question("Vilket är det största talet","1","e","pi","3",3));
 int score= 0;
 string ptheq,pop1,pop2,pop3,pop4,pcorrect;
+int pcorrect2;
 
 while (true) {
     mainmenu();
@@ -15,24 +16,54 @@ void mainmenu() {
     Console.Clear();
     System.Console.WriteLine("write what you want to do");
     System.Console.WriteLine("play");
-    answer = Console.ReadLine();
+    System.Console.WriteLine("Write");
+    answer = Console.ReadLine().ToLower();
     if (answer == "play") {
         takequiz();
+    }
+    else if (answer == "write"){
+        makequiz();
     }
     
 }
 
 void makequiz() {
-    Console.Clear();
-    System.Console.WriteLine("Type the question");
-    ptheq = Console.ReadLine();
-    Console.WriteLine("type 4 option seperate with enter");
-    pop1 = Console.ReadLine();
-    pop2 = Console.ReadLine();
-    pop3 = Console.ReadLine();
-    pop4 = Console.ReadLine();
-    Console.WriteLine("Type 1 if the correct answer is option 1 and so on");
-    pcorrect = Console.ReadLine();
+    while (true) {
+        Console.Clear();
+        System.Console.WriteLine("Type the question");
+        ptheq = Console.ReadLine();
+        Console.WriteLine("type 4 option seperate with enter");
+        pop1 = Console.ReadLine();
+        pop2 = Console.ReadLine();
+        pop3 = Console.ReadLine();
+        pop4 = Console.ReadLine();
+    
+        Console.WriteLine("Type 1 if the correct answer is option 1 and so on");
+        while (true) {
+        pcorrect = Console.ReadLine();
+        pcorrect2 = int.Parse(pcorrect);
+        if (pcorrect2 <= 4){
+            quiz.Add(new Question(ptheq,pop1,pop2,pop3,pop4,pcorrect2));
+            break;
+        }
+        else {
+        System.Console.WriteLine("Write 1, 2, 3 or 4");
+        }
+
+        }
+        Console.Clear();
+        System.Console.WriteLine("Card added want to add another one?");
+        System.Console.WriteLine("yes / no");
+        answer = Console.ReadLine().ToLower();
+        if (answer == "no"){
+            return;
+        }
+        else if(answer != "yes"){
+            return;
+        }
+        // hitta de där vertikala strecken
+
+    }
     
     
 }
