@@ -44,10 +44,6 @@ void save(){
         i.save(lines);
     }
     File.WriteAllLines(file,lines);
-    foreach (string str in lines){
-        System.Console.WriteLine(str);
-    }
-    Console.ReadLine();
     
 
 }
